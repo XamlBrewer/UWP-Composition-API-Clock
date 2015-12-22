@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Composition.Toolkit;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -65,11 +66,24 @@ namespace XamlBrewer.Uwp.Controls
             }
 
             // Hour Hand
+            Uri localUri = new Uri("ms-appx:///Assets/hour_hand.png");
+            var _imageFactory = CompositionImageFactory.CreateCompositionImageFactory(_compositor);
+            CompositionImageOptions options = new CompositionImageOptions()
+            {
+                DecodeWidth = 32,
+                DecodeHeight = 94,
+            };
+
+            var _image = _imageFactory.CreateImageFromUri(localUri, options);
             _hourhand = _compositor.CreateSpriteVisual();
-            _hourhand.Size = new Vector2(4.0f, 100.0f);
-            _hourhand.Brush = _compositor.CreateColorBrush(Colors.Black);
-            _hourhand.CenterPoint = new Vector3(2.0f, 80.0f, 0);
-            _hourhand.Offset = new Vector3(98.0f, 20.0f, 0);
+            _hourhand.Size = new Vector2(32.0f, 94.0f);
+            _hourhand.Brush = _compositor.CreateSurfaceBrush(_image.Surface);
+
+            //_hourhand = _compositor.CreateSpriteVisual();
+            //_hourhand.Size = new Vector2(4.0f, 100.0f);
+            //_hourhand.Brush = _compositor.CreateColorBrush(Colors.Black);
+            _hourhand.CenterPoint = new Vector3(16.0f, 80.0f, 0);
+            _hourhand.Offset = new Vector3(84.0f, 20.0f, 0);
             _root.Children.InsertAtTop(_hourhand);
 
             // Minute Hand

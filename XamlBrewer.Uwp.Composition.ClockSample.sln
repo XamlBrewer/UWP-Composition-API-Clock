@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlBrewer.Uwp.Composition.ClockSample", "XamlBrewer.Uwp.Composition.ClockSample\XamlBrewer.Uwp.Composition.ClockSample.csproj", "{382B3EF2-2A20-420D-BFA5-9E3B34515242}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Microsoft.UI.Composition.Toolkit", "Microsoft.UI.Composition.Toolkit\Microsoft.UI.Composition.Toolkit.vcxproj", "{08A7D060-593A-4978-8DCC-B2029ACA7C95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -33,6 +35,18 @@ Global
 		{382B3EF2-2A20-420D-BFA5-9E3B34515242}.Release|x86.ActiveCfg = Release|x86
 		{382B3EF2-2A20-420D-BFA5-9E3B34515242}.Release|x86.Build.0 = Release|x86
 		{382B3EF2-2A20-420D-BFA5-9E3B34515242}.Release|x86.Deploy.0 = Release|x86
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Debug|ARM.ActiveCfg = Debug|ARM
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Debug|ARM.Build.0 = Debug|ARM
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Debug|x64.ActiveCfg = Debug|x64
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Debug|x64.Build.0 = Debug|x64
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Debug|x86.ActiveCfg = Debug|Win32
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Debug|x86.Build.0 = Debug|Win32
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Release|ARM.ActiveCfg = Release|ARM
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Release|ARM.Build.0 = Release|ARM
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Release|x64.ActiveCfg = Release|x64
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Release|x64.Build.0 = Release|x64
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Release|x86.ActiveCfg = Release|Win32
+		{08A7D060-593A-4978-8DCC-B2029ACA7C95}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
