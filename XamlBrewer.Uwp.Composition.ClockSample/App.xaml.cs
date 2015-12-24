@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mvvm.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,10 +42,10 @@ namespace XamlBrewer.Uwp.Composition.ClockSample
         {
 
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    this.DebugSettings.EnableFrameRateCounter = true;
+            //}
 #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
@@ -72,8 +73,11 @@ namespace XamlBrewer.Uwp.Composition.ClockSample
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                rootFrame.Navigate(typeof(Shell), e.Arguments);
             }
+
+            Theme.ApplyToContainer();
+
             // Ensure the current window is active
             Window.Current.Activate();
         }
