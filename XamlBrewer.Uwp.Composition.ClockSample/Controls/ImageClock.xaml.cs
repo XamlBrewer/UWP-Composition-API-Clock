@@ -1,26 +1,11 @@
 ﻿using Microsoft.UI.Composition.Toolkit;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-//using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Shapes;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace XamlBrewer.Uwp.Controls
 {
@@ -29,6 +14,7 @@ namespace XamlBrewer.Uwp.Controls
         private Compositor _compositor;
         private ContainerVisual _root;
 
+        private SpriteVisual _background;
         private SpriteVisual _hourhand;
         private SpriteVisual _minutehand;
         private SpriteVisual _secondhand;
@@ -47,97 +33,72 @@ namespace XamlBrewer.Uwp.Controls
             _timer.Tick += Timer_Tick;
         }
 
+        public Uri FaceImage { get; set; } = new Uri("ms-appx:///Assets/roman_face.jpg");
+        public Uri HourHandImage { get; set; } = new Uri("ms-appx:///Assets/hour_hand.png");
+        public Uri MinuteHandImage { get; set; } = new Uri("ms-appx:///Assets/minute_hand.png");
+
         private void Clock_Loaded(object sender, RoutedEventArgs e)
         {
             _root = GetVisual(Container);
             _compositor = _root.Compositor;
 
-            // Hour Ticks
-            SpriteVisual tick;
-            for (int i = 0; i < 12; i++)
-            {
-                tick = _compositor.CreateSpriteVisual();
-                tick.Size = new Vector2(4.0f, 20.0f);
-                tick.Brush = _compositor.CreateColorBrush(Colors.Silver);
-                tick.Offset = new Vector3(98.0f, 0.0f, 0);
-                tick.CenterPoint = new Vector3(2.0f, 100.0f, 0);
-                tick.RotationAngleInDegrees = i * 30;
-                _root.Children.InsertAtTop(tick);
-            }
-
-            // Second Hand
-            _secondhand = _compositor.CreateSpriteVisual();
-            _secondhand.Size = new Vector2(2.0f, 120.0f);
-            _secondhand.Brush = _compositor.CreateColorBrush(Colors.Red);
-            _secondhand.CenterPoint = new Vector3(1.0f, 100.0f, 0);
-            _secondhand.Offset = new Vector3(99.0f, 0.0f, 0);
-            _root.Children.InsertAtTop(_secondhand);
-
-            // Hour Hand
-            Uri localUri = new Uri("ms-appx:///Assets/hour_hand.png");
+            // Background
+            _background = _compositor.CreateSpriteVisual();
+            _background.Size = new Vector2(200.0f, 200.0f);
             var _imageFactory = CompositionImageFactory.CreateCompositionImageFactory(_compositor);
             CompositionImageOptions options = new CompositionImageOptions()
             {
-                DecodeWidth = 32,
-                DecodeHeight = 100,
+                DecodeWidth = 400,
+                DecodeHeight = 400,
+            };
+            var _image = _imageFactory.CreateImageFromUri(FaceImage, options);
+            _background.Brush = _compositor.CreateSurfaceBrush(_image.Surface);
+            _root.Children.InsertAtTop(_background);
+
+            // Hour Hand
+            options = new CompositionImageOptions()
+            {
+                DecodeWidth = 72,
+                DecodeHeight = 240,
             };
 
             _hourhand = _compositor.CreateSpriteVisual();
-            _hourhand.Size = new Vector2(32.0f, 100.0f);
-            var _image = _imageFactory.CreateImageFromUri(localUri, options);
+            _hourhand.Size = new Vector2(24.0f, 80.0f);
+            _image = _imageFactory.CreateImageFromUri(HourHandImage, options);
             _hourhand.Brush = _compositor.CreateSurfaceBrush(_image.Surface);
-            _hourhand.CenterPoint = new Vector3(16.0f, 90.0f, 0);
-            _hourhand.Offset = new Vector3(84.0f, 10.0f, 0);
+            _hourhand.CenterPoint = new Vector3(12.0f, 70.0f, 0);
+            _hourhand.Offset = new Vector3(88.0f, 30.0f, 0);
             _root.Children.InsertAtTop(_hourhand);
 
             // Minute Hand
-            localUri = new Uri("ms-appx:///Assets/minute_hand.png");
             options = new CompositionImageOptions()
             {
-                DecodeWidth = 16,
-                DecodeHeight = 100,
+                DecodeWidth = 48,
+                DecodeHeight = 270,
             };
-            _image = _imageFactory.CreateImageFromUri(localUri, options);
+            _image = _imageFactory.CreateImageFromUri(MinuteHandImage, options);
             _minutehand = _compositor.CreateSpriteVisual();
-            _minutehand.Size = new Vector2(16.0f, 100.0f);
+            _minutehand.Size = new Vector2(16.0f, 90.0f);
             _minutehand.Brush = _compositor.CreateSurfaceBrush(_image.Surface);
-            //_minutehand = _compositor.CreateSpriteVisual();
-            //_minutehand.Size = new Vector2(4.0f, 120.0f);
-            //_minutehand.Brush = _compositor.CreateColorBrush(Colors.Black);
-            _minutehand.CenterPoint = new Vector3(8.0f, 100.0f, 0);
-            _minutehand.Offset = new Vector3(92.0f, 0.0f, 0);
+            _minutehand.CenterPoint = new Vector3(8.0f, 85.0f, 0);
+            _minutehand.Offset = new Vector3(92.0f, 15.0f, 0);
             _root.Children.InsertAtTop(_minutehand);
 
-            // Add XAML element.
-            //var xaml = new Ellipse();
-            //xaml.Height = 20;
-            //xaml.Width = 20;
-            //xaml.Fill = new SolidColorBrush(Colors.Red);
-            //xaml.SetValue(Canvas.LeftProperty, 90);
-            //xaml.SetValue(Canvas.TopProperty, 90);
+            SetHoursAndMinutes();
 
-            //Container.Children.Add(xaml);
+            // Second Hand
+            _secondhand = _compositor.CreateSpriteVisual();
+            _secondhand.Size = new Vector2(1.0f, 90.0f);
+            _secondhand.Brush = _compositor.CreateColorBrush(Colors.Red);
+            _secondhand.CenterPoint = new Vector3(0.5f, 90.0f, 0);
+            _secondhand.Offset = new Vector3(99.5f, 10.0f, 0);
+            _root.Children.InsertAtTop(_secondhand);
 
             _timer.Start();
         }
 
         private void Timer_Tick(object sender, object e)
         {
-            // V 1.0 - Incremental, no animation
-            // _secondhand.RotationAngleInDegrees += 6.0f;
-
-            // V2.0 - Incremental, animation
-            //var animation = _compositor.CreateScalarKeyFrameAnimation();
-            //animation.InsertExpressionKeyFrame(1.00f, "this.StartingValue + delta");
-            //animation.SetScalarParameter("delta", 6.0f);
-            //animation.Duration = TimeSpan.FromMilliseconds(100);
-            //_secondhand.StartAnimation("RotationAngleInDegrees", animation);
-
-            // V3.0 - To target, not animation
-            //var now = DateTime.Now;
-            //_secondhand.RotationAngleInDegrees = now.Second * 6;
-
-            // V4.0 - To target, animation
             var now = DateTime.Now;
 
             _batch = _compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
@@ -155,6 +116,11 @@ namespace XamlBrewer.Uwp.Controls
         {
             _batch.Completed -= Batch_Completed;
 
+            SetHoursAndMinutes();
+        }
+
+        private void SetHoursAndMinutes()
+        {
             var now = DateTime.Now;
             _hourhand.RotationAngleInDegrees = (float)now.TimeOfDay.TotalHours * 30;
             _minutehand.RotationAngleInDegrees = now.Minute * 6;
