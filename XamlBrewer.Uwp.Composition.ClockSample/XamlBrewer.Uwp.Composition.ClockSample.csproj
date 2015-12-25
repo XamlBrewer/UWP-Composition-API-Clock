@@ -96,6 +96,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SillyWalkerClock.xaml.cs">
+      <DependentUpon>SillyWalkerClock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImageClock.xaml.cs">
       <DependentUpon>ImageClock.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,9 @@
       <DependentUpon>OtherPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shell.xaml.cs" />
+    <Compile Include="Views\SillyPage.xaml.cs">
+      <DependentUpon>SillyPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -127,12 +133,16 @@
   <ItemGroup>
     <Content Include="Assets\Classic_Face.jpg" />
     <Content Include="Assets\designer_face.jpg" />
+    <Content Include="Assets\Silly_Face.png" />
     <Content Include="Assets\hour_gold.png" />
     <Content Include="Assets\minute_gold.png" />
     <Content Include="Assets\roman_face.jpg" />
     <Content Include="Assets\hour_hand.png" />
     <Content Include="Assets\minute_hand.png" />
     <Content Include="Assets\modern_face.png" />
+    <Content Include="Assets\Silly_Front.png" />
+    <Content Include="Assets\Silly_Hour.png" />
+    <Content Include="Assets\Silly_Minute.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -147,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\SillyWalkerClock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\ImageClock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -166,6 +180,10 @@
     <Page Include="Views\Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SillyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
