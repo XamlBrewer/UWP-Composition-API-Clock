@@ -7,22 +7,44 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d">
 
-    <Grid Background="White">
+    <Grid x:Name="Root"
+          Background="White">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition x:Name="BottomRow"
-                           Height="0" />
+                            />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition x:Name="RightColumn" />
+            <ColumnDefinition x:Name="RightColumn" Width="0" />
         </Grid.ColumnDefinitions>
-        <controls:Clock x:Name="WithTicks"
-                        Margin="20" />
-        <controls:Clock x:Name="WithBackground"
-                        Grid.Column="1"
+        <controls:Clock Margin="20" />
+        <controls:Clock x:Name="SecondClock"
+                        Grid.Row="1"
                         ShowTicks="False"
                         BackgroundImage="ms-appx:///Assets/modern_face.png"
                         Margin="20" />
+
+        <!-- Responsive Visual States -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <!-- VisualState to be triggered when window width is >=548 effective pixels -->
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="548" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="BottomRow.Height"
+                                Value="0" />
+                        <Setter Target="RightColumn.Width"
+                                Value="*" />
+                        <Setter Target="SecondClock.(Grid.Row)"
+                                Value="0" />
+                        <Setter Target="SecondClock.(Grid.Column)"
+                                Value="1" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

@@ -44,52 +44,41 @@ namespace XamlBrewer.Uwp.Controls
             _background = _compositor.CreateSpriteVisual();
             _background.Size = new Vector2(800.0f, 800.0f);
             var _imageFactory = CompositionImageFactory.CreateCompositionImageFactory(_compositor);
-            CompositionImageOptions options = new CompositionImageOptions()
+            var options = new CompositionImageOptions()
             {
                 DecodeWidth = 740,
-                DecodeHeight = 740,
+                DecodeHeight = 740
             };
             var _image = _imageFactory.CreateImageFromUri(FaceImage, options);
             _background.Brush = _compositor.CreateSurfaceBrush(_image.Surface);
             _root.Children.InsertAtTop(_background);
 
             // Hour Hand
+            _hourhand = _compositor.CreateSpriteVisual();
+            _hourhand.Size = new Vector2(800.0f, 800.0f);
             options = new CompositionImageOptions()
             {
                 DecodeWidth = 740,
-                DecodeHeight = 740,
+                DecodeHeight = 740
             };
-
-            _hourhand = _compositor.CreateSpriteVisual();
-            _hourhand.Size = new Vector2(800.0f, 800.0f);
             _image = _imageFactory.CreateImageFromUri(HourHandImage, options);
             _hourhand.Brush = _compositor.CreateSurfaceBrush(_image.Surface);
             _hourhand.Offset = new Vector3(0.0f, 0.0f, 0);
-            _hourhand.CenterPoint = new Vector3(200.0f, 400.0f, 0);
+            _hourhand.CenterPoint = new Vector3(400.0f, 400.0f, 0);
             _root.Children.InsertAtTop(_hourhand);
 
             // Minute Hand
-            options = new CompositionImageOptions()
-            {
-                DecodeWidth = 740,
-                DecodeHeight = 740,
-            };
-            _image = _imageFactory.CreateImageFromUri(MinuteHandImage, options);
             _minutehand = _compositor.CreateSpriteVisual();
             _minutehand.Size = new Vector2(800.0f, 800.0f);
+            _image = _imageFactory.CreateImageFromUri(MinuteHandImage, options);
             _minutehand.Brush = _compositor.CreateSurfaceBrush(_image.Surface);
             _minutehand.Offset = new Vector3(0.0f, 0.0f, 0);
-            _minutehand.CenterPoint = new Vector3(200.0f, 400.0f, 0);
+            _minutehand.CenterPoint = new Vector3(400.0f, 400.0f, 0);
             _root.Children.InsertAtTop(_minutehand);
 
             // Foreground
             _foreground = _compositor.CreateSpriteVisual();
             _foreground.Size = new Vector2(800.0f, 800.0f);
-            options = new CompositionImageOptions()
-            {
-                DecodeWidth = 740,
-                DecodeHeight = 740,
-            };
             _image = _imageFactory.CreateImageFromUri(FrontImage, options);
             _foreground.Brush = _compositor.CreateSurfaceBrush(_image.Surface);
             _root.Children.InsertAtTop(_foreground);
