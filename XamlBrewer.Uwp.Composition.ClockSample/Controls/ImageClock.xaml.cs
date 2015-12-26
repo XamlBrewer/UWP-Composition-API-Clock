@@ -39,7 +39,7 @@ namespace XamlBrewer.Uwp.Controls
 
         private void Clock_Loaded(object sender, RoutedEventArgs e)
         {
-            _root = GetVisual(Container);
+            _root = Container.GetVisual();
             _compositor = _root.Compositor;
 
             // Background
@@ -93,6 +93,7 @@ namespace XamlBrewer.Uwp.Controls
             _secondhand.CenterPoint = new Vector3(0.5f, 90.0f, 0);
             _secondhand.Offset = new Vector3(99.5f, 10.0f, 0);
             _root.Children.InsertAtTop(_secondhand);
+            _secondhand.RotationAngleInDegrees = (float)(int)DateTime.Now.TimeOfDay.TotalSeconds * 6;
 
             _timer.Start();
         }
@@ -124,14 +125,6 @@ namespace XamlBrewer.Uwp.Controls
             var now = DateTime.Now;
             _hourhand.RotationAngleInDegrees = (float)now.TimeOfDay.TotalHours * 30;
             _minutehand.RotationAngleInDegrees = now.Minute * 6;
-        }
-
-        private static ContainerVisual GetVisual(UIElement element)
-        {
-            var hostVisual = ElementCompositionPreview.GetElementVisual(element);
-            ContainerVisual root = hostVisual.Compositor.CreateContainerVisual();
-            ElementCompositionPreview.SetElementChildVisual(element, root);
-            return root;
         }
     }
 }
