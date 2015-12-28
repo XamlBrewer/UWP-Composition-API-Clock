@@ -1,4 +1,5 @@
-﻿using XamlBrewer.Uwp.Composition.ClockSample;
+﻿using Windows.UI.Xaml.Controls;
+using XamlBrewer.Uwp.Composition.ClockSample;
 
 namespace Mvvm
 {
@@ -7,9 +8,9 @@ namespace Mvvm
         public ShellViewModel()
         {
             // Build the menu
-            Menu.Add(new MenuItem() { Glyph = "\uE006", Text = "Modern", NavigationDestination = typeof(MainPage) });
-            Menu.Add(new MenuItem() { Glyph = "\uE208", Text = "Classic", NavigationDestination = typeof(OtherPage) });
-            Menu.Add(new MenuItem() { Glyph = "\uE11D", Text = "Silly", NavigationDestination = typeof(SillyPage) });
+            Menu.Add(new MenuItem() { Glyph = Symbol.Clock, Text = "Modern", NavigationDestination = typeof(MainPage) });
+            Menu.Add(new MenuItem() { Glyph = Symbol.OutlineStar, Text = "Classic", NavigationDestination = typeof(OtherPage) });
+            Menu.Add(new MenuItem() { Glyph = Symbol.Emoji, Text = "Silly", NavigationDestination = typeof(SillyPage) });
         }
     }
 }

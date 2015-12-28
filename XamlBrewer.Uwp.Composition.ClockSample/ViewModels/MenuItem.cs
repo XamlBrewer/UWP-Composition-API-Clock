@@ -1,21 +1,17 @@
-﻿using Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Input;
+using Windows.UI.Xaml.Controls;
 
 namespace Mvvm
 {
     class MenuItem : BindableBase
     {
-        private string glyph;
+        private Symbol glyph;
         private string text;
         private DelegateCommand command;
         private Type navigationDestination;
 
-        public string Glyph
+        public Symbol Glyph
         {
             get { return glyph; }
             set { SetProperty(ref glyph, value); }

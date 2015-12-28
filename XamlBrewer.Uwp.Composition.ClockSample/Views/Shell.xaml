@@ -41,8 +41,8 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <FontIcon x:Name="Glyph"
-                                              Glyph="{Binding Glyph}"
+                                    <SymbolIcon x:Name="Glyph"
+                                              Symbol="{Binding Glyph}"
                                               VerticalAlignment="Center"
                                               HorizontalAlignment="Center"
                                               Foreground="{StaticResource SplitViewForegroundBrush}"
