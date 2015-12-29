@@ -23,6 +23,7 @@
                         Grid.Row="1"
                         ShowTicks="False"
                         BackgroundImage="ms-appx:///Assets/modern_face.png"
+                        FaceColor="LightGoldenrodYellow"
                         Margin="20" />
 
         <!-- Responsive Visual States -->

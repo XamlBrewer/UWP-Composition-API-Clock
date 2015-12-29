@@ -10,14 +10,14 @@
 
     <Viewbox Stretch="Uniform">
         <Canvas x:Name="Container"
-                Background="White"
+                Background="Transparent"
                 Height="200"
                 Width="200">
-            <!--<Ellipse Height="10"
-                     Width="10"
-                     Fill="Red"
-                     Canvas.Left="95"
-                     Canvas.Top="95" />-->
+            <Ellipse x:Name="Face"
+                     Height="200"
+                     Width="200"
+                     Canvas.Left="0"
+                     Canvas.Top="0" />
         </Canvas>
     </Viewbox>
 </UserControl>

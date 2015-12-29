@@ -32,11 +32,14 @@ namespace XamlBrewer.Uwp.Controls
             _timer.Tick += Timer_Tick;
         }
 
+        public Brush FaceColor { get; set; } = new SolidColorBrush(Colors.Transparent);
         public bool ShowTicks { get; set; } = true;
         public ImageSource BackgroundImage { get; set; }
 
         private void Clock_Loaded(object sender, RoutedEventArgs e)
         {
+            Face.Fill = FaceColor;
+
             _root = Container.GetVisual();
             _compositor = _root.Compositor;
 
