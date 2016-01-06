@@ -11,12 +11,12 @@
           Background="White">
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition x:Name="BottomRow"
-                            />
+            <RowDefinition x:Name="BottomRow" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition x:Name="RightColumn" Width="0" />
+            <ColumnDefinition x:Name="RightColumn"
+                              Width="0" />
         </Grid.ColumnDefinitions>
         <controls:Clock Margin="20" />
         <controls:Clock x:Name="SecondClock"

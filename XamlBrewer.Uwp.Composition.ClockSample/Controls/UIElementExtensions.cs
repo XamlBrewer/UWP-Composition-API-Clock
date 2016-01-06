@@ -9,7 +9,7 @@ namespace XamlBrewer.Uwp.Controls
         public static ContainerVisual GetVisual(this UIElement element)
         {
             var hostVisual = ElementCompositionPreview.GetElementVisual(element);
-            ContainerVisual root = hostVisual.Compositor.CreateContainerVisual();
+            var root = hostVisual.Compositor.CreateContainerVisual();
             ElementCompositionPreview.SetElementChildVisual(element, root);
             return root;
         }

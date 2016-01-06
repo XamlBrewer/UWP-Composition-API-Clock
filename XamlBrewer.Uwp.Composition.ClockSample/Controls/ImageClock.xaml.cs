@@ -108,7 +108,7 @@ namespace XamlBrewer.Uwp.Controls
             animation.InsertKeyFrame(0.00f, seconds * 6);
             animation.InsertKeyFrame(1.00f, (seconds + 1) * 6);
             animation.Duration = TimeSpan.FromMilliseconds(900);
-            _secondhand.StartAnimation("RotationAngleInDegrees", animation);
+            _secondhand.StartAnimation(nameof(_secondhand.RotationAngleInDegrees), animation);
             _batch.End();
             _batch.Completed += Batch_Completed;
         }

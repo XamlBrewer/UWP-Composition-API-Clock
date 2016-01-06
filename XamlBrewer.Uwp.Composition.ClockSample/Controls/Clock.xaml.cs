@@ -32,8 +32,10 @@ namespace XamlBrewer.Uwp.Controls
             _timer.Tick += Timer_Tick;
         }
 
-        public Brush FaceColor { get; set; } = new SolidColorBrush(Colors.Transparent);
+
         public bool ShowTicks { get; set; } = true;
+
+        public Brush FaceColor { get; set; } = new SolidColorBrush(Colors.Transparent);
         public ImageSource BackgroundImage { get; set; }
 
         private void Clock_Loaded(object sender, RoutedEventArgs e)
@@ -106,12 +108,19 @@ namespace XamlBrewer.Uwp.Controls
             _batch = _compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
             var animation = _compositor.CreateScalarKeyFrameAnimation();
             var seconds = (float)(int)now.TimeOfDay.TotalSeconds;
-            animation.InsertKeyFrame(0.00f, seconds * 6);
-            animation.InsertKeyFrame(1.00f, (seconds + 1) * 6);
-            //animation.InsertExpressionKeyFrame(1.00f, "this.StartingValue + delta");
-            //animation.SetScalarParameter("delta", 6.0f);
+
+            // This works:
+            //animation.InsertKeyFrame(0.00f, seconds * 6);
+            //animation.InsertKeyFrame(1.00f, (seconds + 1) * 6);
+
+            // Just an example of using expressions:
+            animation.SetScalarParameter("start", seconds * 6);
+            animation.InsertExpressionKeyFrame(0.00f, "start");
+            animation.SetScalarParameter("delta", 6.0f);
+            animation.InsertExpressionKeyFrame(1.00f, "start + delta");
+
             animation.Duration = TimeSpan.FromMilliseconds(900);
-            _secondhand.StartAnimation("RotationAngleInDegrees", animation);
+            _secondhand.StartAnimation(nameof(_secondhand.RotationAngleInDegrees), animation);
             _batch.End();
             _batch.Completed += Batch_Completed;
         }

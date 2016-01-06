@@ -56,11 +56,6 @@ namespace XamlBrewer.Uwp.Controls
             // Hour Hand
             _hourhand = _compositor.CreateSpriteVisual();
             _hourhand.Size = new Vector2(800.0f, 800.0f);
-            options = new CompositionImageOptions()
-            {
-                DecodeWidth = 740,
-                DecodeHeight = 740
-            };
             _image = _imageFactory.CreateImageFromUri(HourHandImage, options);
             _hourhand.Brush = _compositor.CreateSurfaceBrush(_image.Surface);
             _hourhand.Offset = new Vector3(0.0f, 0.0f, 0);
